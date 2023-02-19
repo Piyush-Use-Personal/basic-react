@@ -1,25 +1,23 @@
-import React from "react";
-import logo from "./logo.svg";
+import { useState } from "react";
 import "./App.css";
-import usePerson from "./hooks/usePerson";
 
 function App() {
-  const { name, role, onChange } = usePerson();
+  const [count, setCount] = useState(0)
+  const [staticCount, setStaticCount] = useState(0)
 
-  const changeName = () => {
-    onChange('name', 'name changed')
+  const handleCount = () => {
+    for(let i = 0; i < 30000; i++) {
+      setCount(i)
+      setStaticCount(1)
+    }
   }
-  const changeRole = () => {
-    onChange('role', 'role changed')
-  }
-
+  console.log('re-rendered')
   return (
     <div className="App">
       <header className="App-header">
-        <p>Name: {name}</p>
-        <p>Role: {role}</p>
-        <button onClick={changeName}>Change name</button>
-        <button onClick={changeRole}>Change role</button>
+        <p>Dynamic count: {count}</p>
+        <p>Static count: {staticCount}</p>
+        <button onClick={handleCount}>change count</button>
       </header>
     </div>
   );
